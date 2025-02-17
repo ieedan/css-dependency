@@ -13,16 +13,8 @@
 		"changeset": "changeset",
 		"ci:release": "pnpm build && changeset publish"
 	},
-	"keywords": [
-		"css"
-	],
-	"files": [
-		"dist/**/*",
-		"src/**/*",
-		"package.json",
-		"pnpm-lock.json",
-		"README.md"
-	],
+	"keywords": ["css"],
+	"files": ["dist/**/*", "src/**/*", "package.json", "pnpm-lock.json", "README.md"],
 	"exports": {
 		".": {
 			"import": "./dist/index.js",
