@@ -1,7 +1,7 @@
 {
 	"name": "css-dependency",
 	"packageManager": "pnpm@9.15.4",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"description": "A css parser for getting imports from css code.",
 	"type": "module",
 	"scripts": {
@@ -13,8 +13,16 @@
 		"changeset": "changeset",
 		"ci:release": "pnpm build && changeset publish"
 	},
-	"keywords": ["css"],
-	"files": ["dist/**/*", "src/**/*", "package.json", "pnpm-lock.json", "README.md"],
+	"keywords": [
+		"css"
+	],
+	"files": [
+		"dist/**/*",
+		"src/**/*",
+		"package.json",
+		"pnpm-lock.json",
+		"README.md"
+	],
 	"exports": {
 		".": {
 			"import": "./dist/index.js",
