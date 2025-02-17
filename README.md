@@ -9,7 +9,7 @@ npm install css-dependency
 ```ts
 import { parse } from "css-dependency";
 
-parse('@import "./example.css";');
+const imports = parse('@import "./example.css";');
 
 assert.deepStrictEqual(imports.unwrap(), [
 	{
