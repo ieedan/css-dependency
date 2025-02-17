@@ -11,7 +11,7 @@
 		"check": "biome check && tsc --noEmit",
 		"test": "vitest",
 		"changeset": "changeset",
-		"ci:release": "unbuild && changeset publish"
+		"ci:release": "pnpm build && changeset publish"
 	},
 	"keywords": ["css"],
 	"files": ["dist/**/*", "src/**/*", "package.json", "pnpm-lock.json", "README.md"],
