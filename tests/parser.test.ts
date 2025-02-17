@@ -8,9 +8,11 @@ describe('parse', () => {
 @import url("./another.css");
 @plugin "@tailwindcss/typography";
 @config "./tailwind.config.ts";
-@reference "./app.css";`;
+@reference "./app.css";
+@import url("./some.css") layer(layer-name);
+@import "./some-more.css" layer(layer-name);`;
 
-		expect(css.parse(code)).toStrictEqual([
+		expect(css.parse(code).unwrap()).toStrictEqual([
 			{
 				raw: '@import "tailwindcss";',
 				directive: '@import',
@@ -26,6 +28,16 @@ describe('parse', () => {
 				directive: '@import',
 				module: './another.css',
 			},
+			{
+				raw: '@import url("./some.css") layer(layer-name);',
+				directive: '@import',
+				module: './some.css',
+			},
+			{
+				raw: '@import "./some-more.css" layer(layer-name);',
+				directive: '@import',
+				module: './some-more.css',
+			},
 		]);
 	});
 
@@ -35,9 +47,11 @@ describe('parse', () => {
 @import url("./another.css");
 @plugin "@tailwindcss/typography";
 @config "./tailwind.config.ts";
-@reference "./app.css";`;
+@reference "./app.css";
+@import url("./some.css") layer(layer-name);
+@import "./some-more.css" layer(layer-name);`;
 
-		expect(css.parse(code, { allowTailwindDirectives: true })).toStrictEqual([
+		expect(css.parse(code, { allowTailwindDirectives: true }).unwrap()).toStrictEqual([
 			{
 				raw: '@import "tailwindcss";',
 				directive: '@import',
@@ -68,6 +82,26 @@ describe('parse', () => {
 				directive: '@reference',
 				module: './app.css',
 			},
+			{
+				raw: '@import url("./some.css") layer(layer-name);',
+				directive: '@import',
+				module: './some.css',
+			},
+			{
+				raw: '@import "./some-more.css" layer(layer-name);',
+				directive: '@import',
+				module: './some-more.css',
+			},
 		]);
+	});
+
+	it('Errors when unable to parse module', () => {
+		expect(css.parse("@import url('some.css';").isErr()).toBe(true);
+		expect(css.parse("@import 'some.css;").isErr()).toBe(true);
+	});
+
+	it('Expect to skip error when ignoreErrors is set to true', () => {
+		expect(css.parse("@import url('some.css';", { ignoreErrors: true }).isErr()).toBe(false);
+		expect(css.parse("@import 'some.css;", { ignoreErrors: true }).isErr()).toBe(false);
 	});
 });
