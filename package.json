@@ -1,8 +1,19 @@
 {
 	"name": "css-dependency",
-	"packageManager": "pnpm@9.15.4",
-	"version": "0.0.2",
 	"description": "A css parser for getting imports from css code.",
+	"version": "0.0.2",
+	"license": "MIT",
+	"author": {
+		"name": "Aidan Bleser",
+		"url": "https://github.com/ieedan"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/ieedan/css-dependency"
+	},
+	"bugs": {
+		"url": "https://github.com/ieedan/css-dependency/issues"
+	},
 	"type": "module",
 	"scripts": {
 		"build": "tsup",
@@ -13,23 +24,15 @@
 		"changeset": "changeset",
 		"ci:release": "pnpm build && changeset publish"
 	},
-	"keywords": [
-		"css"
-	],
-	"files": [
-		"dist/**/*",
-		"src/**/*",
-		"package.json",
-		"pnpm-lock.json",
-		"README.md"
-	],
+	"keywords": ["css"],
+	"packageManager": "pnpm@9.15.4",
+	"files": ["dist/**/*", "src/**/*", "package.json", "pnpm-lock.json", "README.md"],
 	"exports": {
 		".": {
 			"import": "./dist/index.js",
 			"types": "./dist/index.d.ts"
 		}
 	},
-	"license": "MIT",
 	"devDependencies": {
 		"@biomejs/biome": "1.9.4",
 		"@changesets/cli": "^2.27.8",
